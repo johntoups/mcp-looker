@@ -1,0 +1,13 @@
+{
+  "fields": [
+    "feature_flags.name",
+    "feature_flags.kind",
+    "feature_flags.archived",
+    "feature_flags.count"
+  ],
+  "filters": {
+    "feature_flags.archived": "No"
+  },
+  "sorts": ["feature_flags.count desc"],
+  "limit": "100"
+}

@@ -1,0 +1,80 @@
+{
+  "explore": "analytics.billing",
+  "query": {
+    "fields": [
+      "billing_data.billingamount",
+      "billing_data.cloudprovider",
+      "billing_data.count"
+    ],
+    "filters": {
+      "billing_data.starttime_date": "30 days"
+    },
+    "sorts": [
+      "billing_data.count desc"
+    ],
+    "limit": "10"
+  },
+  "results": [
+    {
+      "billing_data.billingamount": 0,
+      "billing_data.cloudprovider": "GCP",
+      "billing_data.count": 2126177
+    },
+    {
+      "billing_data.billingamount": 0.0026666666666666666,
+      "billing_data.cloudprovider": "GCP",
+      "billing_data.count": 666688
+    },
+    {
+      "billing_data.billingamount": 0,
+      "billing_data.cloudprovider": "AWS",
+      "billing_data.count": 306153
+    },
+    {
+      "billing_data.billingamount": 0.02266666666666667,
+      "billing_data.cloudprovider": "GCP",
+      "billing_data.count": 304438
+    },
+    {
+      "billing_data.billingamount": 0.13333333333333333,
+      "billing_data.cloudprovider": "GCP",
+      "billing_data.count": 189207
+    },
+    {
+      "billing_data.billingamount": 0.02666666666666667,
+      "billing_data.cloudprovider": "GCP",
+      "billing_data.count": 121866
+    },
+    {
+      "billing_data.billingamount": 0,
+      "billing_data.cloudprovider": "AZURE",
+      "billing_data.count": 92197
+    },
+    {
+      "billing_data.billingamount": 0.22666666666666666,
+      "billing_data.cloudprovider": "GCP",
+      "billing_data.count": 56275
+    },
+    {
+      "billing_data.billingamount": 0.34068,
+      "billing_data.cloudprovider": "AWS",
+      "billing_data.count": 41657
+    },
+    {
+      "billing_data.billingamount": 1.1333333333333333,
+      "billing_data.cloudprovider": "GCP",
+      "billing_data.count": 36183
+    }
+  ],
+  "row_count": 10,
+  "performance": {
+    "runtime_seconds": 53.556390047073364,
+    "status": "complete"
+  },
+  "metadata": {
+    "created_at": "2025-10-11T18:27:40.849827+00:00",
+    "query_id": "XC23SJNmnN7PG88xTWxqXBcnmrHjb7rT",
+    "git_branch": "perf/optimize-lookml-1",
+    "git_commit": "a90d2d9559af1e2acebbb7d9340887c667e554dd"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "fields": [
+    "fct_pipeline_executions.execution_id",
+    "fct_pipeline_executions.status",
+    "fct_pipeline_executions.duration",
+    "fct_pipeline_executions.count"
+  ],
+  "filters": {
+    "fct_pipeline_executions.start_date": "7 days"
+  },
+  "sorts": ["fct_pipeline_executions.count desc"],
+  "limit": "10"
+}

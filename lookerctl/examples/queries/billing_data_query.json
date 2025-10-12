@@ -1,0 +1,12 @@
+{
+  "fields": [
+    "billing_data.billingamount",
+    "billing_data.cloudprovider",
+    "billing_data.count"
+  ],
+  "filters": {
+    "billing_data.starttime_date": "30 days"
+  },
+  "sorts": ["billing_data.count desc"],
+  "limit": "10"
+}

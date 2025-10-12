@@ -1,0 +1,8 @@
+{
+  "row_count": 10,
+  "schema": {
+    "billing_data.billingamount": "number",
+    "billing_data.cloudprovider": "string",
+    "billing_data.count": "number"
+  }
+}

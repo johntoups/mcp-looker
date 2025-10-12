@@ -1,0 +1,9 @@
+{
+  "fields": [
+    "gcp_billing_export_v1_01_e207_52_c4_ca_2_cf8_e2.total_cost"
+  ],
+  "filters": {
+    "gcp_billing_export_v1_01_e207_52_c4_ca_2_cf8_e2.usage_start_date": "7 days"
+  },
+  "limit": "5"
+}

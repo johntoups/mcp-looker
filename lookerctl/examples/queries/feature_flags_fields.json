@@ -1,0 +1,977 @@
+{
+  "explore": "feature_flags",
+  "fields": {
+    "dimensions": [
+      {
+        "name": "archived",
+        "type": "yesno",
+        "description": null,
+        "sql": "${TABLE}.\"archived\"",
+        "hidden": false
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"description\"",
+        "hidden": false
+      },
+      {
+        "name": "identifier",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"identifier\"",
+        "hidden": false
+      },
+      {
+        "name": "kind",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"kind\"",
+        "hidden": false
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"name\"",
+        "hidden": false
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"owner\"",
+        "hidden": false
+      },
+      {
+        "name": "permanent",
+        "type": "yesno",
+        "description": null,
+        "sql": "${TABLE}.\"permanent\"",
+        "hidden": false
+      },
+      {
+        "name": "version",
+        "type": "number",
+        "description": null,
+        "sql": "${TABLE}.\"version\"",
+        "hidden": false
+      },
+      {
+        "name": "created",
+        "type": "time",
+        "description": null,
+        "sql": "${TABLE}.\"created_at\"",
+        "hidden": false
+      },
+      {
+        "name": "created_raw",
+        "type": "datetime",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_time",
+        "type": "time",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_date",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_week",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_month",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_quarter",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_year",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated",
+        "type": "time",
+        "description": null,
+        "sql": "${TABLE}.\"updated_at\"",
+        "hidden": false
+      },
+      {
+        "name": "updated_raw",
+        "type": "datetime",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_time",
+        "type": "time",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_date",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_week",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_month",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_quarter",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_year",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"id\"",
+        "hidden": false
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"account_id\"",
+        "hidden": false
+      },
+      {
+        "name": "created_at",
+        "type": "number",
+        "description": null,
+        "sql": "${TABLE}.\"created_at\"",
+        "hidden": false
+      },
+      {
+        "name": "deleted",
+        "type": "yesno",
+        "description": null,
+        "sql": "${TABLE}.\"deleted\"",
+        "hidden": false
+      },
+      {
+        "name": "identifier",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"identifier\"",
+        "hidden": false
+      },
+      {
+        "name": "last_modified_at",
+        "type": "number",
+        "description": null,
+        "sql": "${TABLE}.\"last_modified_at\"",
+        "hidden": false
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"name\"",
+        "hidden": false
+      },
+      {
+        "name": "org_identifier",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"org_identifier\"",
+        "hidden": false
+      },
+      {
+        "name": "project_identifier",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"project_identifier\"",
+        "hidden": false
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"id\"",
+        "hidden": false
+      },
+      {
+        "name": "account_identifier",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"account_identifier\"",
+        "hidden": false
+      },
+      {
+        "name": "created_at",
+        "type": "number",
+        "description": null,
+        "sql": "${TABLE}.\"created_at\"",
+        "hidden": false
+      },
+      {
+        "name": "deleted",
+        "type": "yesno",
+        "description": null,
+        "sql": "${TABLE}.\"deleted\"",
+        "hidden": false
+      },
+      {
+        "name": "identifier",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"identifier\"",
+        "hidden": false
+      },
+      {
+        "name": "last_modified_at",
+        "type": "number",
+        "description": null,
+        "sql": "${TABLE}.\"last_modified_at\"",
+        "hidden": false
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"name\"",
+        "hidden": false
+      },
+      {
+        "name": "org_identifier",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"org_identifier\"",
+        "hidden": false
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"id\"",
+        "hidden": false
+      },
+      {
+        "name": "account_identifier",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"account_identifier\"",
+        "hidden": false
+      },
+      {
+        "name": "created_at",
+        "type": "number",
+        "description": null,
+        "sql": "${TABLE}.\"created_at\"",
+        "hidden": false
+      },
+      {
+        "name": "deleted",
+        "type": "yesno",
+        "description": null,
+        "sql": "${TABLE}.\"deleted\"",
+        "hidden": false
+      },
+      {
+        "name": "is_managed",
+        "type": "yesno",
+        "description": null,
+        "sql": "${TABLE}.\"is_managed\"",
+        "hidden": false
+      },
+      {
+        "name": "identifier",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"identifier\"",
+        "hidden": false
+      },
+      {
+        "name": "last_modified_at",
+        "type": "number",
+        "description": null,
+        "sql": "${TABLE}.\"last_modified_at\"",
+        "hidden": false
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"name\"",
+        "hidden": false
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"description\"",
+        "hidden": false
+      },
+      {
+        "name": "identifier",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"identifier\"",
+        "hidden": false
+      },
+      {
+        "name": "kind",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"kind\"",
+        "hidden": false
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"name\"",
+        "hidden": false
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"value\"",
+        "hidden": false
+      },
+      {
+        "name": "created",
+        "type": "time",
+        "description": null,
+        "sql": "${TABLE}.\"created_at\"",
+        "hidden": false
+      },
+      {
+        "name": "created_raw",
+        "type": "datetime",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_time",
+        "type": "time",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_date",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_week",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_month",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_quarter",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_year",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated",
+        "type": "time",
+        "description": null,
+        "sql": "${TABLE}.\"updated_at\"",
+        "hidden": false
+      },
+      {
+        "name": "updated_raw",
+        "type": "datetime",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_time",
+        "type": "time",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_date",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_week",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_month",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_quarter",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_year",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "identifier",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"identifier\"",
+        "hidden": false
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"name\"",
+        "hidden": false
+      },
+      {
+        "name": "rules",
+        "type": "string",
+        "description": null,
+        "sql": "cast(${TABLE}.\"rules\" as varchar)",
+        "hidden": false
+      },
+      {
+        "name": "version",
+        "type": "number",
+        "description": null,
+        "sql": "${TABLE}.\"version\"",
+        "hidden": false
+      },
+      {
+        "name": "created",
+        "type": "time",
+        "description": null,
+        "sql": "${TABLE}.\"created_at\"",
+        "hidden": false
+      },
+      {
+        "name": "created_raw",
+        "type": "datetime",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_time",
+        "type": "time",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_date",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_week",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_month",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_quarter",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_year",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated",
+        "type": "time",
+        "description": null,
+        "sql": "${TABLE}.\"updated_at\"",
+        "hidden": false
+      },
+      {
+        "name": "updated_raw",
+        "type": "datetime",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_time",
+        "type": "time",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_date",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_week",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_month",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_quarter",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_year",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "identifier",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"identifier\"",
+        "hidden": false
+      },
+      {
+        "name": "isActive",
+        "type": "yesno",
+        "description": null,
+        "sql": "${state} = 'on'",
+        "hidden": false
+      },
+      {
+        "name": "version",
+        "type": "number",
+        "description": null,
+        "sql": "${TABLE}.\"version\"",
+        "hidden": false
+      },
+      {
+        "name": "created",
+        "type": "time",
+        "description": null,
+        "sql": "${TABLE}.\"created_at\"",
+        "hidden": false
+      },
+      {
+        "name": "created_raw",
+        "type": "datetime",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_time",
+        "type": "time",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_date",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_week",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_month",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_quarter",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_year",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated",
+        "type": "time",
+        "description": null,
+        "sql": "${TABLE}.\"updated_at\"",
+        "hidden": false
+      },
+      {
+        "name": "updated_raw",
+        "type": "datetime",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_time",
+        "type": "time",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_date",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_week",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_month",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_quarter",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_year",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "clauses",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"clauses\"::text",
+        "hidden": false
+      },
+      {
+        "name": "default_serve",
+        "type": "yesno",
+        "description": null,
+        "sql": "${TABLE}.\"default_serve\"",
+        "hidden": false
+      },
+      {
+        "name": "priority",
+        "type": "number",
+        "description": null,
+        "sql": "${TABLE}.\"priority\"",
+        "hidden": false
+      },
+      {
+        "name": "serve",
+        "type": "string",
+        "description": null,
+        "sql": "${TABLE}.\"serve\" ->> 'Variation'",
+        "hidden": false
+      },
+      {
+        "name": "created",
+        "type": "time",
+        "description": null,
+        "sql": "${TABLE}.\"created_at\"",
+        "hidden": false
+      },
+      {
+        "name": "created_raw",
+        "type": "datetime",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_time",
+        "type": "time",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_date",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_week",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_month",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_quarter",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "created_year",
+        "type": "date",
+        "description": "Auto-generated from dimension_group created",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated",
+        "type": "time",
+        "description": null,
+        "sql": "${TABLE}.\"updated_at\"",
+        "hidden": false
+      },
+      {
+        "name": "updated_raw",
+        "type": "datetime",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_time",
+        "type": "time",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_date",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_week",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_month",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_quarter",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "updated_year",
+        "type": "date",
+        "description": "Auto-generated from dimension_group updated",
+        "sql": null,
+        "hidden": false
+      }
+    ],
+    "measures": [
+      {
+        "name": "count",
+        "type": "count",
+        "description": null,
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "count",
+        "type": "count",
+        "description": null,
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "count",
+        "type": "count",
+        "description": null,
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "count",
+        "type": "count",
+        "description": null,
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "count",
+        "type": "count",
+        "description": null,
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "count",
+        "type": "count",
+        "description": null,
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "count",
+        "type": "count",
+        "description": null,
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "state_measure",
+        "type": "list",
+        "description": null,
+        "sql": null,
+        "hidden": false
+      },
+      {
+        "name": "count",
+        "type": "count",
+        "description": null,
+        "sql": null,
+        "hidden": false
+      }
+    ],
+    "filters": [],
+    "parameters": []
+  }
+}

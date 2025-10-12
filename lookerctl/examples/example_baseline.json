@@ -1,0 +1,47 @@
+{
+  "explore": "myapp.features",
+  "query": {
+    "fields": [
+      "feature_flags.name",
+      "feature_flags.kind",
+      "feature_flags.archived",
+      "feature_flags.count"
+    ],
+    "filters": {
+      "feature_flags.archived": "No"
+    },
+    "sorts": ["feature_flags.count desc"],
+    "limit": "100"
+  },
+  "results": [
+    {
+      "feature_flags.name": "dark_mode",
+      "feature_flags.kind": "boolean",
+      "feature_flags.archived": "No",
+      "feature_flags.count": 1547
+    },
+    {
+      "feature_flags.name": "new_dashboard",
+      "feature_flags.kind": "boolean",
+      "feature_flags.archived": "No",
+      "feature_flags.count": 892
+    },
+    {
+      "feature_flags.name": "api_v2_enabled",
+      "feature_flags.kind": "boolean",
+      "feature_flags.archived": "No",
+      "feature_flags.count": 673
+    }
+  ],
+  "row_count": 100,
+  "performance": {
+    "runtime_seconds": 2.34,
+    "status": "complete"
+  },
+  "metadata": {
+    "created_at": "2025-10-11T02:00:00Z",
+    "git_branch": "perf/optimize-lookml-1",
+    "git_commit": "17d2db0",
+    "query_id": "12345"
+  }
+}

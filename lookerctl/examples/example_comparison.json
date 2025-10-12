@@ -1,0 +1,20 @@
+{
+  "baseline": {
+    "row_count": 100,
+    "runtime": 2.34
+  },
+  "current": {
+    "row_count": 100,
+    "runtime": 1.89
+  },
+  "differences": {
+    "row_count_changed": false,
+    "data_changed": false,
+    "data_differences": []
+  },
+  "performance": {
+    "runtime_delta": -0.45,
+    "runtime_percent_change": -19.2
+  },
+  "passed": true
+}

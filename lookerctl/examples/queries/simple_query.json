@@ -1,0 +1,7 @@
+{
+  "fields": [
+    "fct_pipeline_executions.count"
+  ],
+  "filters": {},
+  "limit": "1"
+}

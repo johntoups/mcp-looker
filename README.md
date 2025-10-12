@@ -18,7 +18,7 @@ lookerctl test
 # 3. Export LookML
 lookerctl export all --output-dir ./lookml
 
-# 4. Validate locally (fast!)
+# 4. Perform static analysis and validation (fast!)
 lookerctl validate static ./lookml
 
 # 5. Analyze usage
@@ -27,10 +27,10 @@ lookerctl analyze usage
 
 ## Key Features
 
-- **⚡ 66x Faster Validation** - Local validation in 600ms vs 40s with API
+- **⚡ 66x Faster Validation** - Local validation in 600ms vs 40s with API for a large-scale looker instance
 - **🔄 Complete Local Development** - Export → Edit → Validate → Push workflow
 - **📊 Usage Analysis** - Understand which fields users actually use
-- **🧪 Scientific Testing** - AB testing and golden tests for confidence
+- **🧪 Scientific Testing** - AB testing and golden tests for confidence, complementing Looker's built-in data tests
 - **🔍 Dependency Mapping** - Understand impact before making changes
 - **🤖 AI-Ready** - All outputs in JSON for AI consumption
 - **🔌 MCP Server** - 20 tools for AI agents via Model Context Protocol
