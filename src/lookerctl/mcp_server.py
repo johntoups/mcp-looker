@@ -1193,14 +1193,12 @@ def list_projects() -> dict[str, Any]:
     # Convert to serializable format
     projects_data = []
     for project in projects:
-        projects_data.append(
-            {
-                "id": project.id,
-                "name": project.name,
-                "git_remote_url": project.git_remote_url,
-                "git_production_branch_name": project.git_production_branch_name,
-            }
-        )
+        projects_data.append({
+            "id": project.id,
+            "name": project.name,
+            "git_remote_url": project.git_remote_url,
+            "git_production_branch_name": project.git_production_branch_name,
+        })
 
     return {
         "projects": projects_data,
@@ -1252,14 +1250,12 @@ def validate_project(project_id: str) -> dict[str, Any]:
 
     if result.errors:
         for error in result.errors:
-            validation_result["errors"].append(
-                {
-                    "message": error.message,
-                    "file_path": getattr(error, "file_path", None),
-                    "line_number": getattr(error, "line_number", None),
-                    "severity": getattr(error, "severity", None),
-                }
-            )
+            validation_result["errors"].append({
+                "message": error.message,
+                "file_path": getattr(error, "file_path", None),
+                "line_number": getattr(error, "line_number", None),
+                "severity": getattr(error, "severity", None),
+            })
 
     return validation_result
 

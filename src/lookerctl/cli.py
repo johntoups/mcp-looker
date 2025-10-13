@@ -36,8 +36,6 @@ from pathlib import Path
 import click
 from rich.console import Console
 
-sys.path.insert(0, str(Path(__file__).parent))
-
 from lookerctl.commands.analyze import (
     analyze_all_usage,
     analyze_specific_dashboards,

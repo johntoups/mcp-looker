@@ -195,12 +195,10 @@ def find_dashboards_using_explore(client: LookerClient, explore_key: str) -> dic
 
                             if query.model == model and query.view == explore:
                                 # Found a match!
-                                matching_dashboards.append(
-                                    {
-                                        "id": dashboard.id,
-                                        "title": full_dashboard.title or "Untitled",
-                                    }
-                                )
+                                matching_dashboards.append({
+                                    "id": dashboard.id,
+                                    "title": full_dashboard.title or "Untitled",
+                                })
                                 stats["total_matches"] += 1
                                 # Don't need to check other elements in this dashboard
                                 break
@@ -313,14 +311,12 @@ def trace_field_usage(client: LookerClient, field_name: str) -> dict[str, Any]:
                                 fields_in_query.extend(query.filters.keys())
 
                             if field_name in fields_in_query:
-                                matching_queries.append(
-                                    {
-                                        "query_id": element.query.id,
-                                        "explore": f"{query.model}.{query.view}"
-                                        if query.model and query.view
-                                        else "unknown",
-                                    }
-                                )
+                                matching_queries.append({
+                                    "query_id": element.query.id,
+                                    "explore": f"{query.model}.{query.view}"
+                                    if query.model and query.view
+                                    else "unknown",
+                                })
 
                         except Exception:
                             # Query might not exist
@@ -331,14 +327,12 @@ def trace_field_usage(client: LookerClient, field_name: str) -> dict[str, Any]:
                         # Get unique explores
                         explores = list({q["explore"] for q in matching_queries})
 
-                        dashboards_using_field.append(
-                            {
-                                "id": dashboard.id,
-                                "title": full_dashboard.title or "Untitled",
-                                "explores": explores,
-                                "query_count": len(matching_queries),
-                            }
-                        )
+                        dashboards_using_field.append({
+                            "id": dashboard.id,
+                            "title": full_dashboard.title or "Untitled",
+                            "explores": explores,
+                            "query_count": len(matching_queries),
+                        })
 
                 except Exception as e:
                     error_msg = f"Failed to check dashboard {dashboard.id}: {e}"
@@ -380,15 +374,13 @@ def trace_field_usage(client: LookerClient, field_name: str) -> dict[str, Any]:
                         fields_in_query.extend(query.filters.keys())
 
                     if field_name in fields_in_query:
-                        looks_using_field.append(
-                            {
-                                "id": look.id,
-                                "title": look.title or "Untitled",
-                                "explore": f"{query.model}.{query.view}"
-                                if query.model and query.view
-                                else "unknown",
-                            }
-                        )
+                        looks_using_field.append({
+                            "id": look.id,
+                            "title": look.title or "Untitled",
+                            "explore": f"{query.model}.{query.view}"
+                            if query.model and query.view
+                            else "unknown",
+                        })
 
                 except Exception as e:
                     error_msg = f"Failed to check look {look.id}: {e}"
@@ -421,7 +413,7 @@ def trace_field_usage(client: LookerClient, field_name: str) -> dict[str, Any]:
 
 def analyze_dashboard_usage(client: LookerClient) -> dict[str, Any]:
     """
-    Analyze explore and field usage across all dashboards.
+    Analyze explore and field usage across dashboards in known accounts.
 
     Args:
         client: Looker client instance
@@ -449,13 +441,26 @@ def analyze_dashboard_usage(client: LookerClient) -> dict[str, Any]:
             ) as progress,
             ThreadPoolExecutor() as executor,
         ):
-            # Get all dashboards (cached) with folder info
-            dashboards = client.get_all_dashboards_cached(fields="id,title,folder")
+            # Get known account folder IDs
+            known_folder_ids = list_all_folders(client)
+            console.print(f"[dim]Found {len(known_folder_ids)} folders[/dim]")
 
-            console.print(f"[dim]Found {len(dashboards)} dashboards[/dim]")
+            # Get all dashboards (cached) with folder info
+            all_dashboards = client.get_all_dashboards_cached(fields="id,title,folder")
+
+            # Filter to only dashboards in known account folders
+            dashboards = [
+                d
+                for d in all_dashboards
+                if d.folder and d.folder.id and d.folder.id in known_folder_ids
+            ]
+
+            console.print(
+                f"[dim]Filtered to {len(dashboards)} dashboards (from {len(all_dashboards)} total)[/dim]"
+            )
 
             task = progress.add_task(
-                f"Analyzing {len(dashboards)} dashboards...",
+                f"Analyzing {len(dashboards)} dashboards in known accounts...",
                 total=len(dashboards),
             )
 
@@ -536,7 +541,10 @@ def analyze_dashboard_usage(client: LookerClient) -> dict[str, Any]:
 
 def analyze_look_usage(client: LookerClient) -> dict[str, Any]:
     """
-    Analyze explore and field usage across all looks.
+    Analyze explore and field usage across looks in known folders.
+
+    Only analyzes looks in folders belonging to the known folder names
+    defined in constants.KNOWN_FOLDER_NAMES.
 
     Args:
         client: Looker client instance
@@ -553,14 +561,24 @@ def analyze_look_usage(client: LookerClient) -> dict[str, Any]:
             TextColumn("[progress.description]{task.description}"),
             console=console,
         ) as progress:
-            task = progress.add_task("Analyzing looks...", total=None)
+            task = progress.add_task("Analyzing looks in known accounts...", total=None)
+
+            # Get known folder IDs
+            known_folder_ids = list_all_folders(client)
 
             # Get all looks (cached) with folder info
-            looks = client.get_all_looks_cached(fields="id,title,query_id,folder")
+            all_looks = client.get_all_looks_cached(fields="id,title,query_id,folder")
+
+            # Filter to only looks in known account folders
+            looks = [
+                look
+                for look in all_looks
+                if look.folder and look.folder.id and look.folder.id in known_folder_ids
+            ]
 
             progress.update(
                 task,
-                description=f"Found {len(looks)} looks, analyzing...",
+                description=f"Found {len(looks)} looks in known folders (from {len(all_looks)} total), analyzing...",
             )
 
             for look in looks:
@@ -610,15 +628,19 @@ def analyze_look_usage(client: LookerClient) -> dict[str, Any]:
 
 def analyze_all_usage(client: LookerClient) -> dict[str, Any]:
     """
-    Analyze explore and field usage across all dashboards and looks.
+    Analyze explore and field usage across dashboards and looks in known folders.
+
+    Only analyzes content in folders belonging to the known folder names
+    defined in constants.KNOWN_FOLDER_NAMES. This scoping dramatically reduces
+    analysis time by focusing on meaningful folders.
 
     Args:
         client: Looker client instance
 
     Returns:
-        Comprehensive usage analysis
+        Comprehensive usage analysis for known folders
     """
-    console.print("\n[bold]Analyzing LookML Usage...[/bold]\n")
+    console.print("\n[bold]Analyzing LookML Usage (Known Folders Only)...[/bold]\n")
 
     # Analyze dashboards
     dashboard_result = analyze_dashboard_usage(client)
@@ -744,56 +766,48 @@ def get_explore_fields(client: LookerClient, model_name: str, explore_name: str)
         # Extract dimensions
         if explore.fields and explore.fields.dimensions:
             for field in explore.fields.dimensions:
-                fields_by_type["dimensions"].append(
-                    {
-                        "name": field.name,
-                        "type": field.type,
-                        "label": field.label,
-                        "description": field.description,
-                        "sql": field.sql,
-                        "hidden": field.hidden or False,
-                        "view": field.view_label,
-                    }
-                )
+                fields_by_type["dimensions"].append({
+                    "name": field.name,
+                    "type": field.type,
+                    "label": field.label,
+                    "description": field.description,
+                    "sql": field.sql,
+                    "hidden": field.hidden or False,
+                    "view": field.view_label,
+                })
 
         # Extract measures
         if explore.fields and explore.fields.measures:
             for field in explore.fields.measures:
-                fields_by_type["measures"].append(
-                    {
-                        "name": field.name,
-                        "type": field.type,
-                        "label": field.label,
-                        "description": field.description,
-                        "sql": field.sql,
-                        "hidden": field.hidden or False,
-                        "view": field.view_label,
-                    }
-                )
+                fields_by_type["measures"].append({
+                    "name": field.name,
+                    "type": field.type,
+                    "label": field.label,
+                    "description": field.description,
+                    "sql": field.sql,
+                    "hidden": field.hidden or False,
+                    "view": field.view_label,
+                })
 
         # Extract filters
         if explore.fields and explore.fields.filters:
             for field in explore.fields.filters:
-                fields_by_type["filters"].append(
-                    {
-                        "name": field.name,
-                        "type": field.type,
-                        "label": field.label,
-                        "description": field.description,
-                    }
-                )
+                fields_by_type["filters"].append({
+                    "name": field.name,
+                    "type": field.type,
+                    "label": field.label,
+                    "description": field.description,
+                })
 
         # Extract parameters
         if explore.fields and explore.fields.parameters:
             for field in explore.fields.parameters:
-                fields_by_type["parameters"].append(
-                    {
-                        "name": field.name,
-                        "type": field.type,
-                        "label": field.label,
-                        "description": field.description,
-                    }
-                )
+                fields_by_type["parameters"].append({
+                    "name": field.name,
+                    "type": field.type,
+                    "label": field.label,
+                    "description": field.description,
+                })
 
         return {
             "explore": f"{model_name}.{explore_name}",
@@ -939,16 +953,14 @@ def list_all_explores(client: LookerClient) -> list[dict[str, Any]]:
                     if not explore.name:
                         continue
 
-                    explores_list.append(
-                        {
-                            "model": model.name,
-                            "explore": explore.name,
-                            "key": f"{model.name}.{explore.name}",
-                            "label": explore.label or explore.name,
-                            "description": explore.description or "",
-                            "hidden": explore.hidden or False,
-                        }
-                    )
+                    explores_list.append({
+                        "model": model.name,
+                        "explore": explore.name,
+                        "key": f"{model.name}.{explore.name}",
+                        "label": explore.label or explore.name,
+                        "description": explore.description or "",
+                        "hidden": explore.hidden or False,
+                    })
 
             progress.update(
                 task,
@@ -1014,13 +1026,11 @@ def list_all_folders(client: LookerClient) -> list[dict[str, Any]]:
 
     folder_data = []
     for folder in folders:
-        folder_data.append(
-            {
-                "id": folder.id,
-                "name": folder.name,
-                "parent_id": folder.parent_id,
-            }
-        )
+        folder_data.append({
+            "id": folder.id,
+            "name": folder.name,
+            "parent_id": folder.parent_id,
+        })
 
     return folder_data
 
@@ -1120,13 +1130,11 @@ def get_folder_inventory(client: LookerClient, folder_name: str) -> dict[str, An
 
     for dashboard in all_dashboards:
         if dashboard.folder and dashboard.folder.id in folder_ids:
-            folder_dashboards.append(
-                {
-                    "id": dashboard.id,
-                    "title": dashboard.title or "Untitled",
-                    "folder_id": dashboard.folder.id,
-                }
-            )
+            folder_dashboards.append({
+                "id": dashboard.id,
+                "title": dashboard.title or "Untitled",
+                "folder_id": dashboard.folder.id,
+            })
 
     # Get all looks (cached)
     all_looks = client.get_all_looks_cached(fields="id,title,folder")
@@ -1135,13 +1143,11 @@ def get_folder_inventory(client: LookerClient, folder_name: str) -> dict[str, An
     folder_looks = []
     for look in all_looks:
         if look.folder and look.folder.id in folder_ids:
-            folder_looks.append(
-                {
-                    "id": look.id,
-                    "title": look.title or "Untitled",
-                    "folder_id": look.folder.id,
-                }
-            )
+            folder_looks.append({
+                "id": look.id,
+                "title": look.title or "Untitled",
+                "folder_id": look.folder.id,
+            })
 
     return {
         "folder_name": folder_name,
@@ -1226,13 +1232,11 @@ def get_folder_dependencies(client: LookerClient, folder_name: str) -> dict[str,
     total_fields = 0
 
     for explore_key, fields in analysis["usage_map"].items():
-        explores_used.append(
-            {
-                "explore": explore_key,
-                "fields": list(fields.keys()),
-                "field_count": len(fields),
-            }
-        )
+        explores_used.append({
+            "explore": explore_key,
+            "fields": list(fields.keys()),
+            "field_count": len(fields),
+        })
         total_fields += len(fields)
 
     return {
@@ -1365,13 +1369,11 @@ def get_folder_performance(
                     and runtime > slow_threshold_seconds
                 ):
                     total_slow_queries += 1
-                    dashboard_slow_queries.append(
-                        {
-                            "query_id": query.id,
-                            "element_title": element.title or "Untitled",
-                            "runtime_seconds": runtime,
-                        }
-                    )
+                    dashboard_slow_queries.append({
+                        "query_id": query.id,
+                        "element_title": element.title or "Untitled",
+                        "runtime_seconds": runtime,
+                    })
 
             except Exception as e:
                 # Skip queries that fail to analyze
@@ -1379,17 +1381,15 @@ def get_folder_performance(
                 continue
 
         if dashboard_slow_queries:
-            slow_dashboards.append(
-                {
-                    "dashboard_id": dashboard.id,
-                    "title": dashboard.title or "Untitled Dashboard",
-                    "folder_name": dashboard.folder.name if dashboard.folder else "Unknown",
-                    "slow_queries": dashboard_slow_queries,
-                    "slow_query_count": len(dashboard_slow_queries),
-                    "avg_runtime": sum(q["runtime_seconds"] for q in dashboard_slow_queries)
-                    / len(dashboard_slow_queries),
-                }
-            )
+            slow_dashboards.append({
+                "dashboard_id": dashboard.id,
+                "title": dashboard.title or "Untitled Dashboard",
+                "folder_name": dashboard.folder.name if dashboard.folder else "Unknown",
+                "slow_queries": dashboard_slow_queries,
+                "slow_query_count": len(dashboard_slow_queries),
+                "avg_runtime": sum(q["runtime_seconds"] for q in dashboard_slow_queries)
+                / len(dashboard_slow_queries),
+            })
 
     # Sort by slow query count
     slow_dashboards.sort(key=lambda x: x["slow_query_count"], reverse=True)
