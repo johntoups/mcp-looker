@@ -565,14 +565,12 @@ def push_local_files_to_looker(
                     result["validation"]["has_errors"] = True
 
                     for error in validation_result.errors:
-                        result["validation"]["errors"].append(
-                            {
-                                "message": error.message,
-                                "file_path": error.file_path,
-                                "line": error.line_number,
-                                "severity": error.severity,
-                            }
-                        )
+                        result["validation"]["errors"].append({
+                            "message": error.message,
+                            "file_path": error.file_path,
+                            "line": error.line_number,
+                            "severity": error.severity,
+                        })
 
                     # Print validation errors
                     console.print(

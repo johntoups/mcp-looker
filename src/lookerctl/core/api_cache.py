@@ -261,14 +261,12 @@ class ApiCache:
 
             # Add common field combinations for dashboards/queries
             if endpoint in ("dashboard", "dashboard_lookml"):
-                param_combinations.extend(
-                    [
-                        {id_param: id_value, "fields": "id"},
-                        {id_param: id_value, "fields": "id,title"},
-                        {id_param: id_value, "fields": "id,title,dashboard_elements"},
-                        {id_param: id_value, "fields": "id,title,user_id,folder"},
-                    ]
-                )
+                param_combinations.extend([
+                    {id_param: id_value, "fields": "id"},
+                    {id_param: id_value, "fields": "id,title"},
+                    {id_param: id_value, "fields": "id,title,dashboard_elements"},
+                    {id_param: id_value, "fields": "id,title,user_id,folder"},
+                ])
 
             for params in param_combinations:
                 cache_key = self._make_cache_key(endpoint, params)

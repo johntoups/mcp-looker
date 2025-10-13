@@ -311,28 +311,25 @@ def compare_to_baseline(
                 # Compare values with tolerance for numbers
                 if isinstance(baseline_val, (int, float)) and isinstance(current_val, (int, float)):
                     if abs(baseline_val - current_val) > numeric_tolerance:
-                        row_diffs.append(
-                            {
-                                "field": key,
-                                "baseline": baseline_val,
-                                "current": current_val,
-                                "delta": current_val - baseline_val,
-                            }
-                        )
-                elif baseline_val != current_val:
-                    row_diffs.append(
-                        {
+                        row_diffs.append({
                             "field": key,
                             "baseline": baseline_val,
                             "current": current_val,
-                        }
-                    )
+                            "delta": current_val - baseline_val,
+                        })
+                elif baseline_val != current_val:
+                    row_diffs.append({
+                        "field": key,
+                        "baseline": baseline_val,
+                        "current": current_val,
+                    })
 
             if row_diffs:
                 comparison["differences"]["data_changed"] = True
-                comparison["differences"]["data_differences"].append(
-                    {"row": i, "differences": row_diffs}
-                )
+                comparison["differences"]["data_differences"].append({
+                    "row": i,
+                    "differences": row_diffs,
+                })
 
     # Determine if comparison passed
     if comparison["differences"]["row_count_changed"]:
@@ -603,13 +600,11 @@ def run_all_golden_tests(client: LookerClient, test_dir: Path) -> dict[str, Any]
             print_test_result(result)
         except Exception as e:
             console.print(f"[red]Error running test {test_file.name}:[/red] {e}\n")
-            results.append(
-                {
-                    "test_name": test_file.stem,
-                    "passed": False,
-                    "failures": [str(e)],
-                }
-            )
+            results.append({
+                "test_name": test_file.stem,
+                "passed": False,
+                "failures": [str(e)],
+            })
 
     # Summary
     passed = sum(1 for r in results if r["passed"])
